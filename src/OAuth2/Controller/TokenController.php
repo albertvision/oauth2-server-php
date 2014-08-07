@@ -175,11 +175,12 @@ class TokenController implements TokenControllerInterface
 
                         return false;
                     }
-                } elseif (!$this->scopeUtil->scopeExists($requestedScope)) {
-                    $response->setError(400, 'invalid_scope', 'An unsupported scope was requested');
-
-                    return null;
                 }
+            }
+            if (!$this->scopeUtil->scopeExists($requestedScope)) {
+                $response->setError(400, 'invalid_scope', 'An unsupported scope was requested');
+
+                return null;
             }
         } elseif ($availableScope) {
             // use the scope associated with this grant type
